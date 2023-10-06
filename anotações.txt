@@ -1,0 +1,106 @@
+Estrutura de Dados
+
+Aula 28.04
+
+Listas Ligadas/ Encadeadas
+- motivação: limites de um vetor
+   - Tamanho fixo
+   - Operações nos extremos/pontos podem requerer deslocamento
+
+
+São alocadas na memória conforme a necessidade. Como?
+- Cria pequenas estruturas chamadas nós capazes de armazenar qualquer tipo de informação
+  e coloca-se um ponteiro para apontar para o próximo elemento da lista.
+- Pode mudar para onde aponta o ponteiro sem precisar deslocar as informações do lugar.
+- Perder o endereço de onde o ponteiro deveria estar apontado faz com que se perca a informação.
+- Ao cortar as ligações, libera-se a memória. Ex: malloc e free.
+- Não há acesso randômico, pois é necessário passar pelos primeiros elementos para se chegar a informação desejada.
+   - Ex: fita cassete. Precisa rebobinar para voltar ou avançar as cenas. Não dá para pular ou escolher a cena.
+
+
+Vantagens da lista:
+- Tamanho flexível. Tamanho on demand.
+- Tem operações de inserção ou remoção sem necessidade de deslocamento.
+
+Desantagens da lista:
+- Acesso sequencial, não pode ser randômico.
+- Alocação em memória não contínua. Memória dispersa.
+
+
+Para construção da lista, temos:
+- O endereço do primeiro elemento, eventualmente do último.
+- Cada elemento é chamado de nó.
+
+
+A lista pode ser implementada de diversas maneiras.
+- Simples: 1° elemento aponta para o 2° elemento e vai assim consecutivamente.
+   - Ex: 5 --> 3 --> 20
+         1°        último
+
+- Lista duplamente ligada linear: melhora a navegabilidade quando o elemento sabe quem vem antes e depois.
+   - Ex: 5  -->  3  -->  20 
+            <--     <--
+     
+     Ex2: comandos no prompt, que podem ser acessadas novamente com as setas pra cima e pra baixo.
+
+
+- Lista duplamente encadeada circular: melhora a navegabilidade quando o elemento sabe quem vem antes e depois
+  de forma circular.
+   - Ex: 5  -->  3  -->  20 
+         ^  <--     <--  ^
+         |_______________|
+
+     Ex2: visualização de um produto, em que as imagens podem ser avançadas e voltadas.
+
+Cada elemento é chamado nó. O nó é implementado com um struct, e a definição é recursiva. Portando precisamos de tag:
+
+   struct no {
+      int info;
+      struct no *proximo;
+   }
+
+      ^
+   [] |
+ info prox.
+
+Como saber quantos elemento estão dentro da lista de valores?
+- Lançar um controle que diz quantos tem.
+- Não tem como pular a posição nula, pois pode ter um elemento ou um lixo de memória.
+  Logo, é preciso que todas estejam juntas perto deumas das extremidades.
+- "if (v[2] == NULL)" não existe.
+- Tem como dizer se está disponível ou não.
+
+
+Ao invés de marcar quantos elementos tem, pode-se marcar quais são as posições válidas dentro de um vetor.
+Ex: v = {4, 20, 8, lixoDeMemória(43), lixoDeMemória(12)}
+    posições válidas: 0, 1, 2.
+    Quero remover o 4.
+    v = {4, 20, 8, lixoDeMemória(43), lixoDeMemória(12)}
+    posições válidas: 1, 2.
+
+
+Utilizar vetores é mais rápido, então se for possível utilizá-lo para resolver um problema,
+é bom usá-lo, mas tem suas limitações. Precisa deslocar os elementos e tem tamanho fixo.
+Por isso, para resolver este problema, utiliza-se as listas ligadas.
+
+***Teste de mesa***
+
+
+Comandos
+gcc -c no.c (compila a biblioteca)
+gcc no.c teste_no.c (compila o código e a biblioteca)
+Não dá para compilar no.c por se uma biblioteca e não ter main.
+Para rodar:
+- Powershell: ./a 
+- CMD: a
+
+***********************************************************************
+Aula 05.05
+
+Lista simples: só tem uma seta pra frente, não voltadas
+Lista ligada: a seta vai e volta.
+
+NUNCA remover o prim (variável que aponta para o endereço do 1° elemento da lista ligada).
+Para liberar a memória do 1° elemento removido, faz toda a remoção, para depois liberar o
+endereço guardado numa variável auxiliar.
+Assim, evita-se de perder toda a lista.
