@@ -1,0 +1,4 @@
+1. implementar uma estrutura no com ponteiros para o proximo e para o anterior
+    -> .h
+    -> .c 
+    -> teste.c

@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdlib.h>   //nome da biblioteca entre <>, pega da biblioteca homologada
 #include "no.h"        //pega da biblioteca que foi criada
 
@@ -11,3 +12,9 @@ struct no * aloca_no (int i) {
         }
     return novo;
 };
+
+void exibe_no(struct no *no){
+    printf(" | %d | -> ", no->info );
+    if(no->proximo == NULL)
+        printf("//");
+}
